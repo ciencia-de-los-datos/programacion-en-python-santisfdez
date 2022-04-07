@@ -64,7 +64,7 @@ def pregunta_02():
     tuplas=[(key,valor) for key,valor in result.items()]
     tuplas=sorted(tuplas, key=itemgetter(0), reverse=False)
 
-    return 
+    return tuplas
 
 
 def pregunta_03():
