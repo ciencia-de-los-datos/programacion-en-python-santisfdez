@@ -13,6 +13,9 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
+from dataclasses import replace
+
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -21,7 +24,13 @@ def pregunta_01():
     214
 
     """
-    return
+    with open("data.csv", "r") as file:
+        data=file.readlines()
+
+    data1=[int(row[2]) for row in data]
+    result=sum(data1)
+
+    return result
 
 
 def pregunta_02():
@@ -39,7 +48,23 @@ def pregunta_02():
     ]
 
     """
-    return
+    from operator import itemgetter
+
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[row[0] for row in data]
+
+    result=dict()
+    for letra in data:
+        if letra in result.keys():
+            result[letra]=result[letra]+1
+        else:
+            result[letra]=1
+    
+    tuplas=[(key,valor) for key,valor in result.items()]
+    tuplas=sorted(tuplas, key=itemgetter(0), reverse=False)
+
+    return 
 
 
 def pregunta_03():
@@ -57,8 +82,27 @@ def pregunta_03():
     ]
 
     """
-    return
+    from operator import itemgetter
 
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    
+    data=[row[0:3] for row in data]
+
+    result=dict()
+    for letra in data:
+        if letra[0] in result.keys():
+            result[letra[0]]=result[letra[0]]+int(letra[2])
+        else:
+            result[letra[0]]=int(letra[2])
+
+    tupla=[(key,valor) for key, valor in result.items()]
+    tupla=sorted(tupla, key=itemgetter(0), reverse=False)
+
+    
+    print(tupla)
+    return
+pregunta_03()
 
 def pregunta_04():
     """
