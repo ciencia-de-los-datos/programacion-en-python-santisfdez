@@ -99,10 +99,8 @@ def pregunta_03():
     tupla=[(key,valor) for key, valor in result.items()]
     tupla=sorted(tupla, key=itemgetter(0), reverse=False)
 
-    
-    print(tupla)
-    return
-pregunta_03()
+    return tupla
+
 
 def pregunta_04():
     """
