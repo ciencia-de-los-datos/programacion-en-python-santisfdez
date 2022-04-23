@@ -272,12 +272,12 @@ def pregunta_07():
             result[valor].append(letra)
         else:
             result[valor]=[letra]
-    result=[(key,value) for key , value in result.items()]
+    result=[(int(key),value) for key , value in result.items()]
     result=sorted(result, key=itemgetter(0))
-
 
     
     return result
+
 
 
 def pregunta_08():
@@ -317,7 +317,7 @@ def pregunta_08():
             result[valor].append(letra)
         else:
             result[valor]=[letra]
-    result=[(key,sorted(set(value))) for key , value in result.items()]
+    result=[(int(key),sorted(set(value))) for key , value in result.items()]
     result=sorted(result, key=itemgetter(0))
 
     return result
