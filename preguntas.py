@@ -137,8 +137,8 @@ def pregunta_04():
     for i in mes:
         temp=list(filter(lambda x: x==i, meses))
         result.append((i,len(temp)))
-    result.sort()    
-    return result.sort()
+    result=result.sort()    
+    return result
 
 
 def pregunta_05():
