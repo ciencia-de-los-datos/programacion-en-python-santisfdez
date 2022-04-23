@@ -16,6 +16,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 from calendar import month
 from cgi import test
 from dataclasses import replace
+from operator import itemgetter
 from re import X
 from typing import Counter
 
@@ -128,6 +129,7 @@ def pregunta_04():
     ]
 
     """
+    from operator import itemgetter
     with open("data.csv","r") as file:
         data=file.readlines()
     data=[x.replace("\n","") for x in data]
@@ -137,8 +139,10 @@ def pregunta_04():
     for i in mes:
         temp=list(filter(lambda x: x==i, meses))
         result.append((i,len(temp)))
-    result=result.sort()    
+    result=sorted(result, key=itemgetter(0))   
+    
     return result
+
 
 
 def pregunta_05():
@@ -363,9 +367,9 @@ def pregunta_09():
         else:
             result06[letra]=len(str(valor))
     #result06=sorted(result06, key=itemgetter(0) )
-    print(result06)
+    
     return
-pregunta_09()
+
 
 def pregunta_10():
     """
