@@ -13,6 +13,15 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
+from calendar import month
+from cgi import test
+from dataclasses import replace
+from operator import itemgetter
+from re import X
+from typing import Counter
+from unittest import result
+
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -21,7 +30,13 @@ def pregunta_01():
     214
 
     """
-    return
+    with open("data.csv", "r") as file:
+        data=file.readlines()
+
+    data1=[int(row[2]) for row in data]
+    result=sum(data1)
+
+    return result
 
 
 def pregunta_02():
@@ -39,7 +54,23 @@ def pregunta_02():
     ]
 
     """
-    return
+    from operator import itemgetter
+
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[row[0] for row in data]
+
+    result=dict()
+    for letra in data:
+        if letra in result.keys():
+            result[letra]=result[letra]+1
+        else:
+            result[letra]=1
+    
+    tuplas=[(key,valor) for key,valor in result.items()]
+    tuplas=sorted(tuplas, key=itemgetter(0), reverse=False)
+
+    return tuplas
 
 
 def pregunta_03():
@@ -57,7 +88,24 @@ def pregunta_03():
     ]
 
     """
-    return
+    from operator import itemgetter
+
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    
+    data=[row[0:3] for row in data]
+
+    result=dict()
+    for letra in data:
+        if letra[0] in result.keys():
+            result[letra[0]]=result[letra[0]]+int(letra[2])
+        else:
+            result[letra[0]]=int(letra[2])
+
+    tupla=[(key,valor) for key, valor in result.items()]
+    tupla=sorted(tupla, key=itemgetter(0), reverse=False)
+
+    return tupla
 
 
 def pregunta_04():
@@ -82,7 +130,20 @@ def pregunta_04():
     ]
 
     """
-    return
+    from operator import itemgetter
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[x.replace("\n","") for x in data]
+    meses=[x.split("\t")[2][5:7] for x in data]
+    mes=set([x.split("\t")[2][5:7] for x in data])
+    result=[]
+    for i in mes:
+        temp=list(filter(lambda x: x==i, meses))
+        result.append((i,len(temp)))
+    result=sorted(result, key=itemgetter(0))   
+    
+    return result
+
 
 
 def pregunta_05():
@@ -100,7 +161,26 @@ def pregunta_05():
     ]
 
     """
-    return
+    from operator import itemgetter
+
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[row.split("\t") for row in data]
+    data=[row[:2] for row in data]
+
+    result={}
+    for letra,valor in data:
+        valor=int(valor)
+        if letra in result.keys():
+            result[letra].append(valor)
+        else:
+            result[letra]=[valor]
+    result=[(key,max(value),min(value)) for key , value in result.items()]
+    result=sorted(result, key=itemgetter(0))
+
+    
+    return result
+
 
 
 def pregunta_06():
@@ -125,7 +205,36 @@ def pregunta_06():
     ]
 
     """
-    return
+    from operator import itemgetter
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    
+    data=[row.replace("\n","") for row in data]
+    data=[row.split("\t") for row in data]
+    
+    listas=[row[4].split(",") for row in data]
+
+    result=[]
+    for x in listas:
+        for i in x:
+            key=i[0:3]
+            value=i[4:6]
+            tupla=(str(key),int(value))
+            result.append(tupla)
+
+    result06={}
+    for letra,valor in result:
+        valor=int(valor)
+        if letra in result06.keys():
+            result06[letra].append(valor)
+        else:
+            result06[letra]=[valor]
+    resultdef=[(key,min(value),max(value)) for key , value in result06.items()]
+    resultdef=sorted(resultdef, key=itemgetter(0))
+
+    
+    return resultdef
+
 
 
 def pregunta_07():
@@ -149,7 +258,27 @@ def pregunta_07():
     ]
 
     """
-    return
+    from operator import itemgetter
+
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[row.split("\t") for row in data]
+    data=[tuple(row[0:2]) for row in data]
+
+    #letra=set([x[1] for x in data])
+
+    result={}
+    for letra,valor in data:
+        if valor in result.keys():
+            result[valor].append(letra)
+        else:
+            result[valor]=[letra]
+    result=[(int(key),value) for key , value in result.items()]
+    result=sorted(result, key=itemgetter(0))
+
+    
+    return result
+
 
 
 def pregunta_08():
@@ -174,7 +303,25 @@ def pregunta_08():
     ]
 
     """
-    return
+    from operator import itemgetter
+
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[row.split("\t") for row in data]
+    data=[tuple(row[0:2]) for row in data]
+
+    #letra=set([x[1] for x in data])
+
+    result={}
+    for letra,valor in data:
+        if valor in result.keys():
+            result[valor].append(letra)
+        else:
+            result[valor]=[letra]
+    result=[(int(key),sorted(set(value))) for key , value in result.items()]
+    result=sorted(result, key=itemgetter(0))
+
+    return result
 
 
 def pregunta_09():
@@ -197,7 +344,35 @@ def pregunta_09():
     }
 
     """
-    return
+    from operator import itemgetter
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    
+    data=[row.replace("\n","") for row in data]
+    data=[row.split("\t") for row in data]
+    
+    listas=[row[4].split(",") for row in data]
+
+    result=[]
+    for x in listas:
+        for i in x:
+            key=i[0:3]
+            value=i[4:6]
+            tupla=(str(key),(value))
+            result.append(tupla)
+
+    result06={}
+    for letra,valor in result:
+        if letra in result06.keys():
+            result06[letra].append(int(valor))
+        else:
+            result06[letra]=[valor]
+
+    resultado=[((key),len(value)) for key , value in result06.items()]
+    resultado=sorted(resultado, key=itemgetter(0) )
+    resultado={key:valor for key,valor in resultado}
+    
+    return resultado
 
 
 def pregunta_10():
@@ -216,10 +391,21 @@ def pregunta_10():
         ("E", 3, 3),
     ]
 
-
     """
-    return
-
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[row.replace("\n","") for row in data]
+    data=[row.split("\t") for row in data]
+    
+    result=[]
+    for i in data:
+        letra=i[0]
+        valor1=i[3].split(",")
+        valor2=i[4].split(",")
+        tupla=(letra,len(valor1),len(valor2))
+        result.append(tupla)
+    
+    return result
 
 def pregunta_11():
     """
@@ -239,7 +425,37 @@ def pregunta_11():
 
 
     """
-    return
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[row.replace("\n","") for row in data]
+    data=[row.split("\t") for row in data]
+    letras=[row[3].split(",") for row in data]
+
+    letras=set([item for sublist in letras for item in sublist])
+    #letras=list(letras)
+    
+    result=[]
+    for x in data:
+        a11=x[3].split(",")
+        for q in a11: 
+            letra=q.split(",")
+            prueba=letra[0]
+            valor=x[1]
+            tuple=(prueba,valor)
+            result.append(tuple)
+
+    result11=dict()
+    for letter in result:
+        if letter[0] in result11.keys():
+            result11[letter[0]]=result11[letter[0]]+int(letter[1])
+        else:
+            result11[letter[0]]=int(letter[1])
+
+    tupla=[(key,valor) for key, valor in result11.items()]
+    tupla=sorted(tupla, key=itemgetter(0), reverse=False)
+    tupla={key:valor for key,valor in tupla}
+    
+    return tupla
 
 
 def pregunta_12():
@@ -257,4 +473,30 @@ def pregunta_12():
     }
 
     """
-    return
+    from operator import itemgetter
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    
+    data=[row.replace("\n","") for row in data]
+    data=[row.split("\t") for row in data]
+    
+    result=[]
+    for x in data:
+        a12=x[4].split(",")
+        for q in a12:
+            v12=q.split(":")
+            c12=(x[0],int(v12[1]))
+            result.append(c12)
+
+    result12=dict()
+    for letra in result:
+        if letra[0] in result12.keys():
+            result12[letra[0]]=result12[letra[0]]+int(letra[1])
+        else:
+            result12[letra[0]]=int(letra[1])
+
+    tupla=[(key,valor) for key, valor in result12.items()]
+    tupla=sorted(tupla, key=itemgetter(0), reverse=False)
+    tupla={key:valor for key,valor in tupla}
+    
+    return tupla
