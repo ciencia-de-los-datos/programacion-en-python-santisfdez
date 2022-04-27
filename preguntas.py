@@ -357,18 +357,21 @@ def pregunta_09():
         for i in x:
             key=i[0:3]
             value=i[4:6]
-            tupla=(str(key),int(value))
+            tupla=(str(key),(value))
             result.append(tupla)
 
     result06={}
     for letra,valor in result:
         if letra in result06.keys():
-            result06[letra]=(len(str(valor)))
+            result06[letra].append(int(valor))
         else:
-            result06[letra]=len(str(valor))
-    #result06=sorted(result06, key=itemgetter(0) )
+            result06[letra]=[valor]
+
+    resultado=[((key),len(value)) for key , value in result06.items()]
+    resultado=sorted(resultado, key=itemgetter(0) )
+    resultado={key:valor for key,valor in resultado}
     
-    return
+    return resultado
 
 
 def pregunta_10():
