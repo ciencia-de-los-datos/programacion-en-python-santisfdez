@@ -432,19 +432,31 @@ def pregunta_11():
     letras=[row[3].split(",") for row in data]
 
     letras=set([item for sublist in letras for item in sublist])
-    letras=list(letras)
+    #letras=list(letras)
+    
     result=[]
+    for x in data:
+        a11=x[3].split(",")
+        for q in a11: 
+            letra=q.split(",")
+            prueba=letra[0]
+            valor=x[1]
+            tuple=(prueba,valor)
+            result.append(tuple)
 
-    for i in letras:
-        for x in data[3]:
-            if letras[i]==str(data[3][x]):
-                tupla=(letras[i],data[1])
-                result.append(tupla)
-    
+    result11=dict()
+    for letter in result:
+        if letter[0] in result11.keys():
+            result11[letter[0]]=result11[letter[0]]+int(letter[1])
+        else:
+            result11[letter[0]]=int(letter[1])
 
-    
+    tupla=[(key,valor) for key, valor in result11.items()]
+    tupla=sorted(tupla, key=itemgetter(0), reverse=False)
+    tupla={key:valor for key,valor in tupla}
+    print(tupla)
     return
-
+pregunta_11()
 
 def pregunta_12():
     """
