@@ -425,6 +425,24 @@ def pregunta_11():
 
 
     """
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[row.replace("\n","") for row in data]
+    data=[row.split("\t") for row in data]
+    letras=[row[3].split(",") for row in data]
+
+    letras=set([item for sublist in letras for item in sublist])
+    letras=list(letras)
+    result=[]
+
+    for i in letras:
+        for x in data[3]:
+            if letras[i]==str(data[3][x]):
+                tupla=(letras[i],data[1])
+                result.append(tupla)
+    
+
+    
     return
 
 
@@ -458,17 +476,19 @@ def pregunta_12():
             c12=(x[0],int(v12[1]))
             result.append(c12)
 
-    ##############
-    result=dict()
-    for letra in data:
-        if letra[0] in result.keys():
-            result[letra[0]]=result[letra[0]]+int(letra[2])
+   
+    result12=dict()
+    for letra in result:
+        if letra[0] in result12.keys():
+            result12[letra[0]]=result12[letra[0]]+int(letra[1])
         else:
-            result[letra[0]]=int(letra[2])
+            result12[letra[0]]=int(letra[1])
 
-    tupla=[(key,valor) for key, valor in result.items()]
+    tupla=[(key,valor) for key, valor in result12.items()]
     tupla=sorted(tupla, key=itemgetter(0), reverse=False)
+    tupla={key:valor for key,valor in tupla}
 
     
-    
+    print(tupla)
     return
+pregunta_12()
