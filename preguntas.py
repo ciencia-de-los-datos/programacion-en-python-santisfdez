@@ -19,6 +19,7 @@ from dataclasses import replace
 from operator import itemgetter
 from re import X
 from typing import Counter
+from unittest import result
 
 
 def pregunta_01():
@@ -390,10 +391,21 @@ def pregunta_10():
         ("E", 3, 3),
     ]
 
-
     """
-    return
-
+    with open("data.csv","r") as file:
+        data=file.readlines()
+    data=[row.replace("\n","") for row in data]
+    data=[row.split("\t") for row in data]
+    
+    result=[]
+    for i in data:
+        letra=i[0]
+        valor1=i[3].split(",")
+        valor2=i[4].split(",")
+        tupla=(letra,len(valor1),len(valor2))
+        result.append(tupla)
+    
+    return result
 
 def pregunta_11():
     """
