@@ -454,9 +454,9 @@ def pregunta_11():
     tupla=[(key,valor) for key, valor in result11.items()]
     tupla=sorted(tupla, key=itemgetter(0), reverse=False)
     tupla={key:valor for key,valor in tupla}
-    print(tupla)
-    return
-pregunta_11()
+    
+    return tupla
+
 
 def pregunta_12():
     """
