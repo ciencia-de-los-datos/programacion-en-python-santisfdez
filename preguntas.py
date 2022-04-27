@@ -476,7 +476,6 @@ def pregunta_12():
             c12=(x[0],int(v12[1]))
             result.append(c12)
 
-   
     result12=dict()
     for letra in result:
         if letra[0] in result12.keys():
@@ -487,8 +486,5 @@ def pregunta_12():
     tupla=[(key,valor) for key, valor in result12.items()]
     tupla=sorted(tupla, key=itemgetter(0), reverse=False)
     tupla={key:valor for key,valor in tupla}
-
     
-    print(tupla)
-    return
-pregunta_12()
+    return tupla
